@@ -52,19 +52,9 @@ Optional (recommended): run with a local server (for cleaner development workflo
 - style.css - styling, responsive rules, animations, and theme variables
 - script.js - starfield animation, ISS tracker logic, crew fetch, and news hub logic
 
-## Personalization
-
-Before publishing, update these placeholders in index.html:
-- Hero name (YOUR NAME)
-- Footer name (YOUR NAME)
-- About text details if needed
-
 ## Notes
 
 - Network access is required for live ISS, crew, and news data.
 - If an API request fails, fallback messages are shown in the interface.
 - Favourites and selected theme are stored in localStorage per browser.
 
-## License
-
-This project is for educational and portfolio use.
