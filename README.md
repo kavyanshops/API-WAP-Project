@@ -2,6 +2,10 @@
 
 A straightforward, static web application that gives users real-time insights into the International Space Station, outer-space telemetry, and daily space-related news.
 
+## Hosted Website
+
+https://api-wap-project.vercel.app/
+
 ## 🚀 Key Features
 
 *   **Live ISS Tracking:** Dynamic tracking map that plots the current coordinates of the ISS in real-time, refreshing every 5 seconds.
