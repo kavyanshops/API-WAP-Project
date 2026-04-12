@@ -1,191 +1,202 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SPACE.DEV — ISS Tracker &amp; Space News</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-<!-- STARFIELD -->
-<canvas id="stars"></canvas>
+  <!-- STARFIELD -->
+  <canvas id="stars"></canvas>
 
-<!-- ── NAVIGATION ── -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">SPACE<span>.</span>DEV</a>
-  <ul class="nav-links">
-    <li><a href="#tracker">ISS Live</a></li>
-    <li><a href="#news">News</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-status">
-      <div class="status-dot"></div>
-      <span>LIVE</span>
+  <!-- ── NAVIGATION ── -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">SPACE<span>.</span>DEV</a>
+    <ul class="nav-links">
+      <li><a href="#tracker">ISS Live</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-status">
+        <div class="status-dot"></div>
+        <span>LIVE</span>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+        <span id="theme-icon">☀️</span>
+      </button>
     </div>
-    <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-      <span id="theme-icon">☀️</span>
-    </button>
-  </div>
-</nav>
+  </nav>
 
-<!-- ── HERO ── -->
-<section id="hero">
-  <p class="hero-eyebrow">Space Technology</p>
-  <h1 class="hero-name">Kavyansh <span class="accent">Saini</span></h1>
-  <p class="hero-title">Space Tech Enthusiast &amp; Developer</p>
-  <p class="hero-desc">
-    Exploring the cosmos through code. Track the ISS in real time,
-    browse the latest space news, and discover humanity's journey beyond Earth.
-  </p>
-  <div class="hero-cta">
-    <a href="#tracker" class="btn solid">Track ISS Now</a>
-    <a href="#news" class="btn">Space News</a>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
-  </div>
-</section>
-
-<!-- ── SECTION 1 : ISS LIVE TRACKER ── -->
-<section id="tracker" class="container">
-  <p class="section-label">01 — Real-Time</p>
-  <div class="tracker-header">
-    <h2 class="section-title">ISS Live Tracker</h2>
-    <div class="live-badge">
-      <div class="live-dot"></div>
-      <span>LIVE — Updates every 5 s</span>
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <p class="hero-eyebrow">Space Technology</p>
+    <h1 class="hero-name">Kavyansh <span class="accent">Saini</span></h1>
+    <p class="hero-title">Space Tech Enthusiast &amp; Developer</p>
+    <p class="hero-desc">
+      Exploring the cosmos through code. Track the ISS in real time,
+      browse the latest space news, and discover humanity's journey beyond Earth.
+    </p>
+    <div class="hero-cta">
+      <a href="#tracker" class="btn solid">Track ISS Now</a>
+      <a href="#news" class="btn">Space News</a>
     </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-label">Latitude</div>
-      <div class="stat-value"><span id="lat">—</span><span class="stat-unit">°</span></div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Longitude</div>
-      <div class="stat-value"><span id="lon">—</span><span class="stat-unit">°</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Altitude</div>
-      <div class="stat-value">408<span class="stat-unit">km</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Orbital Speed</div>
-      <div class="stat-value">7.66<span class="stat-unit">km/s</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Orbits / Day</div>
-      <div class="stat-value">15.5</div>
-    </div>
-  </div>
+  </section>
 
-  <div id="map">
-    <div class="map-overlay">TIMESTAMP: <span id="map-timestamp">—</span></div>
-  </div>
-
-  <h3 class="crew-heading">Humans Currently in Space</h3>
-  <div id="crew-grid" class="crew-grid">
-    <p class="loading-text"><span class="loading-dots">Fetching crew data</span></p>
-  </div>
-</section>
-
-<!-- ── SECTION 2 : SPACE NEWS HUB ── -->
-<section id="news" class="container">
-  <p class="section-label">02 — Space News Hub</p>
-  <h2 class="section-title">Latest Space News</h2>
-
-  <!-- Controls -->
-  <div class="controls-bar">
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="search-input" class="search-input" placeholder="Search articles..." autocomplete="off" />
-      <button id="clear-search" class="clear-btn" aria-label="Clear">✕</button>
-    </div>
-    <select id="filter-source" class="ctrl-select">
-      <option value="all">All Sources</option>
-    </select>
-    <select id="sort-select" class="ctrl-select">
-      <option value="newest">Newest First</option>
-      <option value="oldest">Oldest First</option>
-      <option value="az">Title A → Z</option>
-      <option value="za">Title Z → A</option>
-    </select>
-    <button id="fav-toggle" class="fav-toggle-btn">⭐ Show Favourites</button>
-  </div>
-
-  <div class="results-info">
-    <span id="results-count">Loading articles...</span>
-    <span id="fav-count" class="fav-count-badge"></span>
-  </div>
-
-  <div id="news-loading" class="news-loading">
-    <div class="spinner"></div>
-    <p class="loading-text"><span class="loading-dots">Fetching latest news</span></p>
-  </div>
-
-  <div id="news-grid" class="news-grid"></div>
-
-  <div id="no-results" class="no-results hidden">
-    <p>🚀 No articles found. Try a different search or filter.</p>
-  </div>
-</section>
-
-<!-- ── SECTION 3 : ABOUT ── -->
-<section id="about" class="container about-section">
-  <p class="section-label">03 — About</p>
-  <div class="about-grid">
-    <div class="about-text">
-      <h2 class="section-title">Who I Am</h2>
-      <p class="about-bio">
-        I'm a university student with a deep passion for space technology, orbital
-        mechanics, and the future of human spaceflight. From tracking satellites to
-        studying rocket propulsion, I believe space exploration is humanity's greatest adventure.
-      </p>
-      <p class="about-bio">
-        This website integrates the <strong>Open Notify API</strong> for live ISS
-        telemetry and the <strong>Spaceflight News API</strong> for real-time articles —
-        combining fetch, Array HOFs, and modern UI design.
-      </p>
-      <div class="tech-tags">
-        <span class="tag">HTML5</span>
-        <span class="tag">CSS3</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">REST APIs</span>
-        <span class="tag">Array HOFs</span>
-        <span class="tag">Leaflet.js</span>
-        <span class="tag">Open Notify</span>
-        <span class="tag">Spaceflight News</span>
+  <!-- ── SECTION 1 : ISS LIVE TRACKER ── -->
+  <section id="tracker" class="container">
+    <p class="section-label">01 — Real-Time</p>
+    <div class="tracker-header">
+      <h2 class="section-title">ISS Live Tracker</h2>
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        <span>LIVE — Updates every 5 s</span>
       </div>
     </div>
-    <div class="orbit-wrap">
-      <div class="orbit-visual">
-        <div class="orbit-ring"><div class="orbit-dot"></div></div>
-        <div class="orbit-ring"><div class="orbit-dot"></div></div>
-        <div class="orbit-ring"><div class="orbit-dot"></div></div>
-        <div class="orbit-center">ISS<br><span class="orbit-alt">408 KM</span></div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Latitude</div>
+        <div class="stat-value"><span id="lat">—</span><span class="stat-unit">°</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Longitude</div>
+        <div class="stat-value"><span id="lon">—</span><span class="stat-unit">°</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Altitude</div>
+        <div class="stat-value">408<span class="stat-unit">km</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Orbital Speed</div>
+        <div class="stat-value">7.66<span class="stat-unit">km/s</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Orbits / Day</div>
+        <div class="stat-value">15.5</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-copy">© 2026 — Kavyansh Saini — Space Technology Portfolio</div>
-  <div class="footer-api">
-    APIs:
-    <a href="http://open-notify.org" target="_blank">Open Notify</a> ·
-    <a href="https://www.spaceflightnewsapi.net" target="_blank">Spaceflight News</a> ·
-    <a href="https://leafletjs.com" target="_blank">Leaflet.js</a>
-  </div>
-</footer>
+    <div id="map">
+      <div class="map-overlay">TIMESTAMP: <span id="map-timestamp">—</span></div>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="script.js"></script>
+    <h3 class="crew-heading">Humans Currently in Space</h3>
+    <div id="crew-grid" class="crew-grid">
+      <p class="loading-text"><span class="loading-dots">Fetching crew data</span></p>
+    </div>
+  </section>
+
+  <!-- ── SECTION 2 : SPACE NEWS HUB ── -->
+  <section id="news" class="container">
+    <p class="section-label">02 — Space News Hub</p>
+    <h2 class="section-title">Latest Space News</h2>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Search articles..." autocomplete="off" />
+        <button id="clear-search" class="clear-btn" aria-label="Clear">✕</button>
+      </div>
+      <select id="filter-source" class="ctrl-select">
+        <option value="all">All Sources</option>
+      </select>
+      <select id="sort-select" class="ctrl-select">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="az">Title A → Z</option>
+        <option value="za">Title Z → A</option>
+      </select>
+      <button id="fav-toggle" class="fav-toggle-btn">⭐ Show Favourites</button>
+    </div>
+
+    <div class="results-info">
+      <span id="results-count">Loading articles...</span>
+      <span id="fav-count" class="fav-count-badge"></span>
+    </div>
+
+    <div id="news-loading" class="news-loading">
+      <div class="spinner"></div>
+      <p class="loading-text"><span class="loading-dots">Fetching latest news</span></p>
+    </div>
+
+    <div id="news-grid" class="news-grid"></div>
+
+    <div id="no-results" class="no-results hidden">
+      <p>🚀 No articles found. Try a different search or filter.</p>
+    </div>
+  </section>
+
+  <!-- ── SECTION 3 : ABOUT ── -->
+  <section id="about" class="container about-section">
+    <p class="section-label">03 — About</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Who I Am</h2>
+        <p class="about-bio">
+          I'm a university student with a deep passion for space technology, orbital
+          mechanics, and the future of human spaceflight. From tracking satellites to
+          studying rocket propulsion, I believe space exploration is humanity's greatest adventure.
+        </p>
+        <p class="about-bio">
+          This website integrates the <strong>Wheretheiss API</strong> for live ISS
+          telemetry and the <strong>Spaceflight News API</strong> for real-time articles —
+          combining fetch, loops, and basic UI design.
+        </p>
+        <div class="tech-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Loops</span>
+          <span class="tag">Leaflet.js</span>
+          <span class="tag">Wheretheiss</span>
+          <span class="tag">Spaceflight News</span>
+        </div>
+      </div>
+      <div class="orbit-wrap">
+        <div class="orbit-visual">
+          <div class="orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-center">ISS<br><span class="orbit-alt">408 KM</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-copy">© 2026 — Kavyansh Saini</div>
+    <div class="footer-api">
+      APIs:
+      <a href="http://open-notify.org" target="_blank">Open Notify</a> ·
+      <a href="https://www.spaceflightnewsapi.net" target="_blank">Spaceflight News</a> ·
+      <a href="https://leafletjs.com" target="_blank">Leaflet.js</a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

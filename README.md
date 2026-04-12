@@ -1,60 +1,48 @@
-# SPACE.DEV - ISS Tracker & Space News
+# Capstone ISS Tracker
 
-A responsive single-page web app that combines:
-- Live International Space Station tracking on an interactive map
-- Current astronaut crew data from orbit
-- Latest space news with search, filter, sort, and favourites
-- A polished portfolio-style UI with animated starfield and theme toggle
+A straightforward, static web application that gives users real-time insights into the International Space Station, outer-space telemetry, and daily space-related news.
 
-This version was rebuilt from scratch because I was not satisfied with the previous version.
+## 🚀 Key Features
 
-## Features
+*   **Live ISS Tracking:** Dynamic tracking map that plots the current coordinates of the ISS in real-time, refreshing every 5 seconds.
+*   **Humans in Space:** A live view of the crew currently orbiting Earth, complete with names and their respective spacecrafts.
+*   **Space News Hub:** A complete news feed displaying the latest space and astronomy related articles, featuring categorization by news source, search functionality, and a personal ‘Favorites’ list.
+*   **Dynamic UI:** Clean grid-based layouts, a dark/light mode toggle, and a dynamic HTML Canvas background.
 
-- Real-time ISS telemetry updates every 5 seconds
-- Leaflet map with moving ISS marker and recent trajectory path
-- Live coordinates and UTC timestamp display
-- Current humans-in-space roster with craft grouping summary
-- Space news hub:
-  - Full-text search (debounced)
-  - Source filtering
-  - Sorting by date and title
-  - Local favourites saved in browser storage
-- Light and dark theme switching (persisted in localStorage)
-- Mobile-friendly layout
+## 💻 Tech Stack
 
-## Tech Stack
+This project was built focusing on web fundamentals using no external build frameworks:
+*   **HTML5** 
+*   **CSS3** (Flexbox, CSS Variables)
+*   **JavaScript** (DOM Manipulation, Loops, Fetch API)
+*   **Leaflet.js** (For interactive map rendering)
 
-- HTML5
-- CSS3
-- Vanilla JavaScript (ES6+)
-- Leaflet.js
-- Open Notify API
-- Spaceflight News API
+### Data Providers (REST APIs)
+*   **Wheretheiss API** (`https://api.wheretheiss.at/v1/satellites/25544`) - Coordinates & telemetry of the ISS.
+*   **Open-Notify APIs Archive** (`https://corquaid.github.io/international-space-station-APIs/JSON/people-in-space.json`) - Reliable feed of current astronauts.
+*   **Spaceflight News API** (`https://api.spaceflightnewsapi.net/v4/articles`) - Live article streaming.
 
-## APIs Used
+---
 
-- ISS current position: https://api.open-notify.org/iss-now.json
-- Astronauts in space: https://api.open-notify.org/astros.json
-- Space articles: https://api.spaceflightnewsapi.net/v4/articles/?limit=80&format=json
+## 🛠️ How to Run Locally
 
-## Run Locally
+Because this project is a purely static website containing only HTML, CSS, and JS files without any dependencies, it is incredibly simple to run on any computer:
 
-No build step is required.
+### Option 1: Direct File Open (Easiest)
+1. Download or clone this repository to your computer.
+2. Locate the folder where you saved the files.
+3. Simply double-click `index.html`. It will open in your default web browser (Chrome, Safari, Firefox, Edge).
+4. *Note: Ensure you have an active internet connection so the Application can fetch the API data and map tiles!*
 
-1. Open the project folder.
-2. Launch index.html in a browser.
+### Option 2: Live Server (Recommended for Developers)
+If you are modifying the code using Visual Studio Code, it's recommended to run a local server:
+1. Open this project folder in **Visual Studio Code**.
+2. Install the **"Live Server"** extension created by Ritwick Dey from the extensions panel.
+3. Right-click on the `index.html` file in the sidebar and select **"Open with Live Server"**.
+4. Your browser will automatically open a local server (usually `http://127.0.0.1:5500`) to view the application.
 
-Optional (recommended): run with a local server (for cleaner development workflow), for example VS Code Live Server.
+## 📝 Design Notes
 
-## Project Structure
-
-- index.html - page layout and sections
-- style.css - styling, responsive rules, animations, and theme variables
-- script.js - starfield animation, ISS tracker logic, crew fetch, and news hub logic
-
-## Notes
-
-- Network access is required for live ISS, crew, and news data.
-- If an API request fails, fallback messages are shown in the interface.
-- Favourites and selected theme are stored in localStorage per browser.
-
+*   No complex array methods or advanced modern syntax were used. The application's fundamental logic utilizes loops and straightforward conditionals.
+*   The `.css` styling logic avoids extreme nested variables or dynamic post-processing calculations in favor of readable flex layouts.
+*   Local storage (`localStorage`) is used cleanly to save the user's Dark Mode preference and their favorite News Articles.
