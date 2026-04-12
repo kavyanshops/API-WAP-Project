@@ -1,4 +1,4 @@
-# Capstone ISS Tracker
+# PULSAR - Capstone ISS Tracker
 
 A straightforward, static web application that gives users real-time insights into the International Space Station, outer-space telemetry, and daily space-related news.
 
@@ -44,5 +44,4 @@ If you are modifying the code using Visual Studio Code, it's recommended to run 
 ## 📝 Design Notes
 
 *   No complex array methods or advanced modern syntax were used. The application's fundamental logic utilizes loops and straightforward conditionals.
-*   The `.css` styling logic avoids extreme nested variables or dynamic post-processing calculations in favor of readable flex layouts.
 *   Local storage (`localStorage`) is used cleanly to save the user's Dark Mode preference and their favorite News Articles.
